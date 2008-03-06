@@ -1,0 +1,12 @@
+Here's a very simple J2ME app that updates Fire Eagle using user-entered text 
+or lat/lon from GPS-enabled phones (using JSR 179).
+
+It won't work if your phone doesn't support JSR 179 (but it should be pretty easy to cut it down to run
+on any phone)
+
+Executables are available in /dist.
+
+It uses a library for doing OAuth stuff.  The JAR for that is in /lib (source code coming soon).
+The javadoc for FE_OAuth.jar is not great yet -- if you're curious, a good starting place is
+the javadoc for FireEagleConsumer (and the MIDlet is a pretty good example of how to use FireEagleConsumer.
+

@@ -152,11 +152,7 @@
         <antcall target="post-init" inheritall="true" inheritrefs="true"/>
     </target>
     <target name="post-init"/>
-    <target name="deps-jar" depends="init" unless="no.deps">
-        <ant target="jar" inheritall="false" antfile="${project.FE_OAuth}/build.xml">
-            <property name="config.active" value=""/>
-        </ant>
-    </target>
+    <target name="deps-jar" depends="init" unless="no.deps"/>
     <target name="conditional-clean" depends="init" unless="no.clean.before.build" description="Clean project in case its meta information has changed.">
         <antcall inheritrefs="true" inheritall="true" target="do-clean"/>
     </target>

@@ -1,7 +1,6 @@
 /*
- * HelloMidlet.java
+ * FEMidlet.java
  *
- * Created on November 20, 2007, 10:15 AM
  */
 
 package net.yahoo.pinpoint;
@@ -25,10 +24,8 @@ public class FEMidlet extends MIDlet implements CommandListener, Runnable {
     static final String RECORD_STORE_NAME="FEoauthTokens";   
     static final String OAUTH_CONSUMER_TOKEN="VIGmpgmn4ED8";
     static final String OAUTH_CONSUMER_SECRET="Fas4xsTmNaPTN3sTMiWup5pzA79yK4nm";
-    //static final String OAUTH_CONSUMER_TOKEN="t1xcj6t3a2tw";
-    //static final String OAUTH_CONSUMER_SECRET="q44qm153m8frl7si37v7ci3phgn7tbsc";
     
-    /** Creates a new instance of HelloMidlet */
+    /** Creates a new instance of the MIDlet */
     public FEMidlet() {
     }
     

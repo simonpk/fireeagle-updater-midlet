@@ -1,0 +1,8 @@
+net.oauth.j2me
+net.oauth.j2me.signature
+net.oauth.j2me.token
+net.yahoo.fireeagle.j2me
+org.bouncycastle.crypto
+org.bouncycastle.crypto.digests
+org.bouncycastle.crypto.macs
+org.bouncycastle.crypto.params
