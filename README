@@ -4,7 +4,14 @@ or lat/lon from GPS-enabled phones (using JSR 179).
 It won't work if your phone doesn't support JSR 179 (but it should be pretty easy to cut it down to run
 on any phone)
 
-Executables are available in /dist.
+Executables are available in /dist. You can download to PC and Bluetooth to your phone 
+(you can take the JAD, though really only the JAR is needed). 
+Or you can try to directly load the JAR to your phone via http://tinyurl.com/yw66td
+
+Once you get it installed, you may want to set permissions so that it doesn't constantly hassle you
+for permission to connect to the network or access location services.  On Nokia S60 phones
+you can adjust permissions through Tools->App. mgr (select the FireEagle app and scroll around
+to find Network access and Positioning)
 
 It uses a library for doing OAuth stuff.  The JAR for that is in /lib (source code coming soon).
 The javadoc for FE_OAuth.jar is not great yet -- if you're curious, a good starting place is
