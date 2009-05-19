@@ -1,7 +1,8 @@
-MIDlet-1: FireEagle,,net.yahoo.pinpoint.FEMidlet
-MIDlet-Jar-Size: 33054
+MIDlet-1: FE Updater,/j2me_icon84_1.png,net.yahoo.fireeagle.FEMidlet
+MIDlet-Icon: /j2me_icon37_1.png
+MIDlet-Jar-Size: 42082
 MIDlet-Jar-URL: fireeagle-updater-midlet.jar
-MIDlet-Name: FireEagle
+MIDlet-Name: FE Updater
 MIDlet-Vendor: Vendor
 MIDlet-Version: 1.0
 MicroEdition-Configuration: CLDC-1.1
