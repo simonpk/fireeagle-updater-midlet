@@ -21,9 +21,16 @@ import net.yahoo.fireeagle.j2me.FireEagleConsumer;
 
 public class FEMidlet extends MIDlet implements CommandListener, Runnable {
     
-    static final String RECORD_STORE_NAME="FEoauthTokens";   
-    static final String OAUTH_CONSUMER_TOKEN="VIGmpgmn4ED8";
-    static final String OAUTH_CONSUMER_SECRET="Fas4xsTmNaPTN3sTMiWup5pzA79yK4nm";
+    static final String FIREEAGLE_AUTH_URL="http://m.fireeagle.yahoo.net/oauth/mobile_auth/";
+
+    static final String RECORD_STORE_NAME="Insert a Record store name here";
+    // The following three will be given to you by Fire Eagle when you register
+    // your app.
+    static final String OAUTH_CONSUMER_TOKEN="Insert Your Consumer Token Here";
+    static final String OAUTH_CONSUMER_SECRET="Insert Your Consumer Secret Here";
+    //The app ID is the integer at the end of the Mobile Auth URL of the
+    //application you register, as given to you by Fire Eagle.
+    static final String FIREEAGLE_APP_ID="Insert Your App ID here";
     
     /** Creates a new instance of the MIDlet */
     public FEMidlet() {
@@ -54,6 +61,7 @@ public class FEMidlet extends MIDlet implements CommandListener, Runnable {
     private StringItem feLocStringItem;
     private Spacer spacer1;
     private TextField locEntryField;
+    private TextField verifierEntryField;
     
     private static final int _ASYNC_NOTHING = 0;
     private static final int _ASYNC_CA = 1;
@@ -81,6 +89,7 @@ public class FEMidlet extends MIDlet implements CommandListener, Runnable {
             stringItemCode.setLabel(requestToken.getToken());
             authForm.addCommand(this.get_authNextCommand());
         } else {
+            stringItemCode.setLabel("Error retrieving request token");
             System.out.println("error getting request token");
             // TODO -- give user a way to try again...
         }
@@ -90,8 +99,10 @@ public class FEMidlet extends MIDlet implements CommandListener, Runnable {
     // throw no request token exception if request token not set
     public void exchangeToken() {
         AccessToken accessToken=null;
+        String verifier=this.get_verifierEntryField().getString();
+        System.out.println("verifier="+verifier);
         try {
-            accessToken=fireEagleClient.fetchNewAccessToken();
+            accessToken=fireEagleClient.fetchNewAccessToken(verifier);
         } catch (BadTokenStateException e) {
             System.out.println("error getting access token "+e.toString());
         } catch (OAuthServiceProviderException e) {
@@ -491,12 +502,12 @@ public class FEMidlet extends MIDlet implements CommandListener, Runnable {
                 get_stringItemCode(),
                 get_spacer1(),
                 get_stringItemInstuctions(),
-                get_authURL()
+                get_authURL(),
+                get_verifierEntryField()
             });
             authForm.addCommand(get_authNextCommand());
             authForm.setCommandListener(this);
             authForm.addCommand(get_homeCommand());
-            get_authURL().setText(fireEagleClient.MOBILE_AUTH_URL);
         }
         return authForm;
     }
@@ -573,7 +584,7 @@ public class FEMidlet extends MIDlet implements CommandListener, Runnable {
     
     public StringItem get_stringItemInstuctions() {
         if (stringItemInstuctions == null) {
-            stringItemInstuctions = new StringItem("", "Please go to the URL below and enter the code above.  Hit \"Next\" when done");
+            stringItemInstuctions = new StringItem("", "Please go to the URL below and enter the code above. The website may present a verification code which you will have to enter below. Hit \"Next\" when done");
         }
         return stringItemInstuctions;
     }
@@ -584,10 +595,20 @@ public class FEMidlet extends MIDlet implements CommandListener, Runnable {
         }
         return locEntryField;
     }
+
+    public TextField get_verifierEntryField() {
+        if (verifierEntryField == null) {
+            verifierEntryField = new TextField("Verifier:", null, 120, TextField.ANY);
+        }
+        return verifierEntryField;
+    }
     
+    //We do not use the one from FireEagleClient, since it is hardcoded for
+    //Simon King's J2ME Updater. Also, the URL is wrong. We need to use our
+    //own.
     public StringItem get_authURL() {
         if (authURL == null) {
-            authURL = new StringItem("", "a URL");
+            authURL = new StringItem("", FEMidlet.FIREEAGLE_AUTH_URL+FEMidlet.FIREEAGLE_APP_ID);
         }
         return authURL;
     }
